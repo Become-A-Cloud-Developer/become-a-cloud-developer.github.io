@@ -4,7 +4,7 @@ title = "Technical Opportunities"
 weight = 2
 collapsibleMenu = true
 alwaysopen = false
-draft = true
+draft = false
 +++
 
 {{% children sort="weight" %}}

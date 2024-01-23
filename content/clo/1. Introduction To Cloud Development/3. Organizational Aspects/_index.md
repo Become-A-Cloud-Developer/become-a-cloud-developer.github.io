@@ -4,7 +4,7 @@ title = "Organizational Aspects"
 weight = 3
 collapsibleMenu = true
 alwaysopen = false
-draft = true
+draft = false
 +++
 
 {{% children sort="weight" %}}

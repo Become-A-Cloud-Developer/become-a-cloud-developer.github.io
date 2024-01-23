@@ -4,7 +4,7 @@ title = "Cloud Native Development"
 weight = 4
 collapsibleMenu = true
 alwaysopen = false
-draft = true
+draft = false
 +++
 
 {{% children sort="weight" %}}

@@ -4,7 +4,7 @@ title = "Understanding Cloud Computing"
 weight = 1
 collapsibleMenu = true
 alwaysopen = false
-draft = true
+draft = false
 +++
 
 {{% children sort="weight" %}}
