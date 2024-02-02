@@ -2,3 +2,6 @@ baseURL = 'https://cloud-developer.educ8.se/'
 languageCode = 'en-us'
 title = 'Become A Cloud Developer'
 theme = 'relearn'
+
+[markup.goldmark.renderer]
+  unsafe = true
