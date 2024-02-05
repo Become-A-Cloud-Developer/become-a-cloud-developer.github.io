@@ -1,5 +1,5 @@
 +++
-title = 'Provision a Virtual Machine on Google Cloud Platform and Deploy an Nginx Web Server'
+title = "Provision a Virtual Machine on Google Cloud Platform and Install an Nginx Web Server"
 weight = 2
 date = 2024-01-23T11:28:13+01:00
 draft = false
@@ -80,5 +80,11 @@ Limitations:
 - The content is served unencrypted on HTTP
 - The provisioning and deployment is done manually. No automation is applied.
 - Access to the VM is done through the built-in web based terminal in the GCP console, which means you need access to the GCP platform in order to access the VM
+
+## Don't Forget
+
+Google Cloud Storage is a paid service, and charges apply for storage, network usage, and other features like operations and retrieval. Make sure to review the current pricing and manage your resources accordingly.
+
+Don't forget to delete all resources once you are done with this tutorial.
 
 # Happy cloud computing! 🚀
