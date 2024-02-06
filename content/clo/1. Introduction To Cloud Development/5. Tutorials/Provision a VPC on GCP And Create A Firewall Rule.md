@@ -5,6 +5,10 @@ date = 2024-02-05
 draft = false
 +++
 
+## Video
+
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/910239641?h=19ce5173fc&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="GCP VPC"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+
 ## Introduction
 
 This tutorial is designed for individuals with a basic understanding of cloud concepts and who are interested in learning how to set up a Virtual Private Cloud (VPC) on Google Cloud Platform (GCP) and create a firewall rule that opens port 8080 for Internet traffic. We will use an nginx web server listening on port 8080 to verify the solution. We will go step-by-step through the process, emphasizing best practices and troubleshooting.

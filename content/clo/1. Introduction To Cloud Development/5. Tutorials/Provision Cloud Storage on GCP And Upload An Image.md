@@ -5,6 +5,10 @@ date = 2024-02-05
 draft = false
 +++
 
+## Video
+
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/910241711?h=8e6ce6c6e0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="GCP Cloud Storage"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+
 ## Introduction
 
 This tutorial is designed for individuals with a basic understanding of cloud concepts and who are interested in learning how to set up Cloud Storage on Google Cloud Platform (GCP) and upload an image. We will also look into how to make the image publicly available on the Internet as well as how we can keep track on different versions of the file. We will go step-by-step through the process, emphasizing best practices and troubleshooting.
