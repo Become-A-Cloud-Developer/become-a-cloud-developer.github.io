@@ -42,7 +42,7 @@ This tutorial is designed for individuals with a basic understanding of cloud co
 > - Most often you want to select the region closest to you
 > - The instance type _E2 micro_ is cheap and sufficient for many test purposes
 > - Debian is considered a very stable Linux distro and usually the default OS on GCP VMs
-## Deploy Nginx
+## Install Nginx
 
 1. Accessing the VM
 	- Once the VM is set up, click on "SSH" in the VM instances page to open a terminal in the browser.
