@@ -5,6 +5,10 @@ date = 2024-02-11
 draft = false
 +++
 
+## Video
+
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/912243936?h=b7cadb99bc&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Azure VM Nginx"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+
 ## Introduction
 
 This tutorial is designed for individuals with a basic understanding of cloud concepts and who are interested in learning how to set up a virtual machine (VM) on Azure and deploy an Nginx web server. We will go step-by-step through the process, emphasizing best practices and troubleshooting.
@@ -54,6 +58,7 @@ This tutorial is designed for individuals with a basic understanding of cloud co
 		apt-get install nginx -y
 		systemctl start nginx
 		systemctl enable nginx
+
 		```
    - Once all details are filled in, review the configuration by clicking "Review + create" and then click "Create".
    - Download the SSH private key from the popup dialog box (if you chose SSH above)
