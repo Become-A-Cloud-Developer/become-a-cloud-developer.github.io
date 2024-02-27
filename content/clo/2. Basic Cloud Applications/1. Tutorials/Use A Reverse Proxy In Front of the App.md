@@ -66,33 +66,33 @@ In order to "set the table" so that we can verify that the reverse proxy works a
 - **Configure Nginx as a Reverse Proxy**:
   - Edit the Nginx server block in `/etc/nginx/sites-available/`
 	  
-	    ```bash
-	    sudo nano /etc/nginx/sites-available/default
-	    ```
+	  ```bash
+	  sudo nano /etc/nginx/sites-available/default
+	  ```
   - Configure the server block to proxy requests to your application server:
-
-		```nginx
-		server {
-			listen        80 default_server;
-			location / {
-				proxy_pass         http://<InternalIP>:<Port>/;
-				proxy_http_version 1.1;
-				proxy_set_header   Upgrade $http_upgrade;
-				proxy_set_header   Connection keep-alive;
-				proxy_set_header   Host $host;
-				proxy_cache_bypass $http_upgrade;
-				proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
-				proxy_set_header   X-Forwarded-Proto $scheme;
-			}
-		}
-		```
+  
+    ```nginx
+    server {
+      listen        80 default_server;
+      location / {
+        proxy_pass         http://<InternalIP>:<Port>/;
+        proxy_http_version 1.1;
+        proxy_set_header   Upgrade $http_upgrade;
+        proxy_set_header   Connection keep-alive;
+        proxy_set_header   Host $host;
+        proxy_cache_bypass $http_upgrade;
+        proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Proto $scheme;
+      }
+    }
+    ```
 	    
   - Enable the configuration by linking it to the `sites-enabled` directory and reloading Nginx:
   
-	    ```bash
-	    sudo nginx -t
-	    sudo systemctl reload nginx
-	    ```
+    ```bash
+    sudo nginx -t
+    sudo systemctl reload nginx
+    ```
 
 ### 5. **Testing and Verification**
 
