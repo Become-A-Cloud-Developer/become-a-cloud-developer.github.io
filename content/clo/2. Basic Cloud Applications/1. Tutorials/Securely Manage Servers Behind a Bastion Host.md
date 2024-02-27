@@ -97,7 +97,7 @@ This tutorial is aimed at IT professionals and system administrators who wish to
 
   On a new terminal, establish an SSH tunnel to the WebServer via BastionHost:
   ```bash
-  ssh -A -N -L 2222:10.0.0.5:22 azureuser@<BastionHost_IP>
+  ssh -A -N -L 2222:<WevServer_privateIP>:22 azureuser@<BastionHost_IP>
   ```
 
   > The terminal will now "get stuck". So in order to continue use a second terminal. Add private keys to the SSH agent as before.
