@@ -7,7 +7,7 @@ draft = false
 
 ## Introduction
 
-This tutorial is designed for developers and system administrators looking to configure Nginx as a reverse proxy in front of an application server on Azure. Both servers will reside within the same virtual network.
+This tutorial is designed for developers and system administrators looking to configure **Nginx as a reverse proxy** in front of an application server on Azure. Both servers will reside within the same virtual network.
 
 ## Prerequisites
 
@@ -15,7 +15,7 @@ This tutorial is designed for developers and system administrators looking to co
 - Familiarity with Azure portal, cloud networking, and SSH.
 - Basic knowledge of Nginx.
 
-In order to "set the table" so that we can verify that the reverse proxy works as expected, let's create two VMs - one Application Server and one Reverse Proxy. These two servers should be conneccted to the same subnet in this example.
+In order to "set the table" so that we can verify that the reverse proxy works as expected, let's create two VMs - one Application Server and one Reverse Proxy. These two servers should be connected to the same subnet in this example.
 
 ### 1. **Provision the Virtual Network**
 
@@ -24,7 +24,7 @@ In order to "set the table" so that we can verify that the reverse proxy works a
 - **Create a Virtual Network**:
   - Navigate to "Virtual networks" and select "Create".
   - Fill in the details, including name (e.g., `DemoVNet`), region, and address space (e.g., `10.1.0.0/16`).
-  - Create a subnet within the VNet with a specific address range (e.g., `10.1.0.0/24`).
+  - Create a subnet within the VNet with a specific address range (e.g., `10.1.0.0/24`). If you do it in the portal a `default` subnet will automatically be created.
 
 ### 2. **Deploy Two Azure VMs**
 
@@ -34,6 +34,7 @@ In order to "set the table" so that we can verify that the reverse proxy works a
   - Select an Ubuntu Server image (22.04 LTS recommended).
   - Size the VM according to your needs and set up SSH authentication.
   - **Assign the VM to the subnet within your virtual network.**
+  - **Open port 80 for HTTP traffic.**
 
 - **Create VM for Application Server**:
   - Repeat the above steps to create a second VM within the same virtual network and subnet. This VM will host your application.
@@ -48,8 +49,12 @@ In order to "set the table" so that we can verify that the reverse proxy works a
   
 - **Install Nginx and Configure Your Application** (for demonstration purposes):
   - Install Nginx and start the service
-  - Replace the default web page with your application's content.
 
+    ```bash
+    sudo apt-get update && sudo apt-get install nginx -y
+    ```
+
+  - Edit the default web page so that you can identify it when you browse to it. This step is just to set it apart from the Reverse Proxy that also runs Nginx.
 
 ## Install and Configure Nginx on the Reverse Proxy Server
 
@@ -70,6 +75,8 @@ In order to "set the table" so that we can verify that the reverse proxy works a
 	  sudo nano /etc/nginx/sites-available/default
 	  ```
   - Configure the server block to proxy requests to your application server:
+
+    > /etc/nginx/sites-available/default
   
     ```nginx
     server {
@@ -86,7 +93,9 @@ In order to "set the table" so that we can verify that the reverse proxy works a
       }
     }
     ```
-	    
+	  
+    > Note that you have to change the IP and port according to what your App Server has. Also make sure the firewall is open between the Reverse Proxy and the App Server.
+
   - Enable the configuration by linking it to the `sites-enabled` directory and reloading Nginx:
   
     ```bash
