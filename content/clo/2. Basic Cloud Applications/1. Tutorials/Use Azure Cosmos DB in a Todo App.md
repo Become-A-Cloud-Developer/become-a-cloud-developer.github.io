@@ -56,7 +56,7 @@ By the end of this guide, you'll have a functional to-do list application powere
 
 ### Set Up the Webapp
 
-Create a directory called `CosmoDB` and open up a terminal. Run the command below to create a Razor Pages webapp:
+Create a directory called `CosmosDB` and open up a terminal. Run the command below to create a Razor Pages webapp:
 
 ```bash
 dotnet new webapp
