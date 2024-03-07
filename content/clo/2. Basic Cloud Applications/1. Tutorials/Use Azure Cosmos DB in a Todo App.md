@@ -271,7 +271,7 @@ builder.Services.AddSingleton<ITodoService, AzureCosmosDBTodoService>();
 app.Run();
 ```
 
-## Present the images on the web page
+## Implement the presentation layer
 
 ### Create an OnGetAsync method in the controller
 
