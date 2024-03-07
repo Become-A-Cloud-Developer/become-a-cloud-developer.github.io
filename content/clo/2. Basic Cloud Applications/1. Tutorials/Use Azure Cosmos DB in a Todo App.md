@@ -41,10 +41,7 @@ By the end of this guide, you'll have a functional to-do list application powere
 		- Press **Review + create**
 		- Press **Create**
 		- Press **Go to resource**
-	- Select **Configuration** in the _Settings_ section of the storage account menu
-		- (Alt: Select **Security** from storage account _Overview_)
-	- Enable **Allow Blob anonymous access**
-	- Press **Save**
+	- Select **Connection strings** in the _Settings_ section of the Cosmos account menu
 
 ### Retrieve the Connection String
 
