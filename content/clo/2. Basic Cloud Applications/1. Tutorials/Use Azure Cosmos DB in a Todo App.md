@@ -1,6 +1,6 @@
 +++
 title = "Use Azure Cosmos DB in a Todo App"
-weight = 5
+weight = 7
 date = 2024-03-04
 draft = false
 +++
