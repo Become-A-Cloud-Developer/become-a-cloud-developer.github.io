@@ -304,9 +304,6 @@ You've successfully learned how to display images from Azure Blob Storage in an 
 
 Azure services incur costs. Delete resources you no longer need.
 
-# Happy Developing! 🚀
-
-
 ## References
 
 This tutorial is based on the following articles
@@ -320,7 +317,79 @@ Lifetime:
 https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/
 
 
+# Happy Developing! 🚀
 
+
+
+
+## Working with Azure Storage Accounts Locally
+
+Developing cloud applications often involves interacting with resources in the cloud itself. However, constantly interacting with live cloud resources during development can be slow and cost-ineffective. 
+
+This tutorial guides you through setting up your local development environment for working with Azure Storage accounts using two tools allowing you to emulate Azure Storage accounts locally:
+
+- Azurite emulator (VSCode Extension)
+- Azure Storage Explorer (Application for Windows, Mac and Linux)
+
+### Using the Azurite Emulator with VSCode
+
+Azurite is an open-source storage emulator supported by Azure. It emulates Azure Blob, Queue, and Table storage services locally, enabling offline development. The easiest way to use Azurite is through its VSCode extension.
+
+#### Setting up Azurite in VSCode:
+
+1. **Install the Azurite Extension**: Open VSCode, go to the Extensions view by clicking on the extension icon on the sidebar. Search for "Azurite" and install the extension.
+2. **Start Azurite**: Once installed, open the Command Palette with `Ctrl+Shift+P` (or `Cmd+Shift+P` on Mac), type "Azurite: Start", and select the command. This action starts the emulator and creates a default storage account locally. (You will also find the Azurite services in the bottom status bar, where you can easily toggle the services on and off)
+
+#### Configuring Your Application:
+
+
+1. Create the Blob storage container in the emulator
+	- Go to the "Azure" icon in the VSCode left menu bar
+	- Under the "Workspace" section you find the emulator. Expand "Attached Storage Accounts"
+	- Right click the Blob Containers and create the `imagerepository`
+
+
+2. To interact with the emulated storage account, update your application's storage connection string to use Azurite's default settings in the Development environment:
+
+	> appsettings.Development.json
+
+	```json
+	  "AzureBlobImageService": {
+	    "ConnectionString": "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://127.0.0.1:10000/devstoreaccount1;",
+	    "ContainerName": "imagerepository"
+	  }
+	```
+
+
+For guidance on Azurite and detailed setup instructions, go to the [official Microsoft Learn documentation](https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azurite?tabs=visual-studio-code%2Cblob-storage#connect-to-azurite-with-sdks-and-tools).
+
+### Exploring Local Storage with Azure Storage Explorer
+
+Azure Storage Explorer is a standalone application that allows you to manage Azure Storage data. It supports browsing data in Azure Blob, File Shares, Queues, Tables, and Cosmos DB and it also **works with local data emulated by Azurite**.
+
+#### Setting Up Azure Storage Explorer:
+
+1. **Download Azure Storage Explorer**: Go to the [Azure Storage Explorer download page](https://azure.microsoft.com/en-us/products/storage/storage-explorer) and download the version compatible with your operating system.
+2. **Install and Open Azure Storage Explorer**: Follow the installation guide. Once installed, launch the application.
+
+#### Connecting to Azurite:
+
+1. **Open Azure Storage Explorer** and navigate to the "Local & Attached" section in the Explorer pane.
+2. **Connect to Azurite**: Right-click on "Storage Accounts", select "Connect to Azure Storage...", and choose "Attach to a local emulator (standard ports)".
+3. **Replicate Cloud Settings Locally**: Right-click on "imagerepository" to change the settings for *public access settings* to Blob
+4. Upload some content
+
+If you want to know more about Azure Storage Explorer, go to the [official documentation](https://docs.microsoft.com/azure/vs-azure-tools-storage-manage-with-storage-explorer).
+
+> You can run **Azurite: Clean** from the Command Palette do delete the local blob storage.
+
+##### Verify
+
+Start you application and verify that you see the local content
+
+### Conclusion
+
+Azurite, combined with the Azure Storage Explorer, provides a great setup for local development, allowing you to emulate, manage, and interact with storage accounts locally.
 
 
 
