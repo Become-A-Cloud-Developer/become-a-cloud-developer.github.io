@@ -189,7 +189,7 @@ Verify that it works.
 
 In order to facilitate the orchestration of multiple docker containers we can use Docker Compose. It's an IaC tool where we can describe an entire docker environment using YAML.
 
-You'll define a `docker-compose.yaml` file, describing your application's structure, including the ASP.NET app, MongoDB, and any additional services like Mongo Express. This approach enables you to start, stop, and manage your entire environment with simple Docker Compose commands.
+You'll define a `compose.yaml` file, describing your application's structure, including the ASP.NET app, MongoDB, and any additional services like Mongo Express. This approach enables you to start, stop, and manage your entire environment with simple Docker Compose commands.
 
 First we remove all containers again.
 > Warning: Only do this if you have nothing important running. All containers are removed.
@@ -198,9 +198,9 @@ First we remove all containers again.
 docker rm -f $(docker ps -aq)
 ```
 
-Let's create a file called `docker-compose.yaml` and add this content
+Let's create a file called `compose.yaml` and add this content
 
-> docker-compose.yaml
+> compose.yaml
 
 ```yaml
 services:
@@ -216,7 +216,7 @@ services:
 Bring up the todo app by running:
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 Verify that it works
@@ -224,12 +224,12 @@ Verify that it works
 Remove the entire environment by running:
 
 ```bash
-docker-compose down
+docker compose down
 ```
 
-Now, we have our first docker-compose file working. Let's add the other components - The MongoDB, the volume, the network and Mongo Express.
+Now, we have our first compose file working. Let's add the other components - The MongoDB, the volume, the network and Mongo Express.
 
-> docker-compose.yaml
+> compose.yaml
 
 ```yaml
 services:
@@ -264,14 +264,14 @@ volumes:
   mongodb-data:
 ```
 
-> Note how the network is not explicitly mentioned. It will be created though. You can see it in the output when running `docker-compose`
+> Note how the network is not explicitly mentioned. It will be created though. You can see it in the output when running `docker compose`
 
 ## Clean up
 
 With Docker Compose it's easy to clean up and reset an environment. Run:
 
 ```bash
-docker-compose down -v
+docker compose down -v
 ```
 
 > Note: if you appen -v after the command it will remove the volumes as well
