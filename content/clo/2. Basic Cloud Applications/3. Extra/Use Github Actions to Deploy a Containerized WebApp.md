@@ -69,7 +69,7 @@ In the hosting end we  will setup two different targets. 1) An Azure VM running 
 	
 	```bash
 	docker build -t mydemoapp .
-	docker run -p 8080:8080 ghcr.io/<repo>/mydemoapp
+	docker run -p 8080:8080 mydemoapp
 	docker push
 	```
 	
@@ -110,7 +110,7 @@ To provision the Azure Container App, follow these steps:
 	resource_group=DockerDemoRG
 	location=northeurope
 	env_name=DockerDemoEnv
-	app_name= mydemoapp
+	app_name=mydemoapp
 	app_port=8080
 	image=ghcr.io/<repo>/mydemoapp
 		
