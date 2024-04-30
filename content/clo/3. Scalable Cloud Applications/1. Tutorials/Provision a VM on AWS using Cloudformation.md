@@ -132,7 +132,7 @@ When the resources are provisioned we will continue to configure them. In the ca
 - In order to find the latest Amazon Linux 2023 AMI you can either go to the AWS Console or run the the following AWS CLI command:
 
     ```bash
-    aws ssm get-parameter --name "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2" --query "Parameter.Value" --output text
+    aws ssm get-parameter --name "/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64" --query "Parameter.Value" --output text
     ```
 
 Let´s add the EC2 resource to the CF template and provision the template again:
@@ -290,6 +290,12 @@ Cloudformation Template Anatomy: https://docs.aws.amazon.com/AWSCloudFormation/l
 Cloudformation AWS::EC2::SecurityGroup reference: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-securitygroup.html
 
 Cloudformation AWS::EC2::Instance reference: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-instance.html
+
+Find lates AMI for Amazon Linux 2023:
+
+https://docs.aws.amazon.com/linux/al2023/ug/ec2.html
+
+https://docs.aws.amazon.com/linux/al2023/ug/ec2.html#launch-from-cloudformation
 
 
 # TL;DR
