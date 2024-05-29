@@ -7,7 +7,7 @@ draft = false
 
 ## Introduction
 
-This tutorial guides you through creating a serverless web application with a contact form on AWS. The application uses AWS S3 for hosting the front-end, AWS Lambda and API Gateway for backend processing and DynamoDB to store the greetings. When contact information is entered in the form it will be saved in DynamoDB and an email is sent, using SES, as a notification. We'll walk through each step, ensuring you verify the functionality at each stage.
+This tutorial guides you through creating a serverless web application with a contact form on AWS. The application uses AWS S3 for hosting the front-end, AWS Lambda and API Gateway for backend processing and DynamoDB to store information. When contact information is entered in the form it will be saved in DynamoDB and an email is sent, using SES, as a notification. We'll walk through each step, ensuring you verify the functionality at each stage.
 
 ## Method
 
@@ -66,10 +66,10 @@ We will need two lambda functions. One that writes the contact information to th
     - Select _AWS service_
     - Service or use case: **Lambda**
     - Press **Next**
-    - Check: AWSLambdaBasicExecutionRole
-    - Check: AmazonDynamoDBFullAccess
+		- Check: **AWSLambdaBasicExecutionRole**
+		- Check: **AmazonDynamoDBFullAccess**
     - Press **Next**
-    - Role name: LambdaRoleToAccessDynamoDB
+    - Role name: `LambdaRoleToAccessDynamoDB`
     - Press **Create role**
 
 2. **Create a Lambda Function that writes a record to the DynamoDB**
@@ -78,64 +78,66 @@ We will need two lambda functions. One that writes the contact information to th
         - Function name: `AddContactInfo`
         - Runtime: Python
         - Expand _Change default execution role_ and choose _Use an existing role_
-        - Existing role: LambdRoleToAccessDynamoDB
+        - Existing role: **LambdRoleToAccessDynamoDB**
         - Press **Create function**
 
         
     - Change the Python code for your Lambda function to this:
 
-    > `lambda_function.py`
+		> `lambda_function.py`
 
-    ```python
-	import json                     # used for converting json strings to Python objects
-	import boto3                    # handles AWS
-	from datetime import datetime   # used for creating the timestamp
-	
-	def lambda_handler(event, context):
-	    # Connect to the DynamoDB table
-	    db = boto3.resource('dynamodb')
-	    table = db.Table('Contacts')
-	
-	    # Create the time stamp
-	    dateTime = (datetime.now()).strftime("%Y-%m-%d %H:%M:%S")
-	    
-	    try:
-	        # Get the contact info from the request
-	        payload = json.loads(event['body'])
-	    
-	        # Add a row with contact info to DynamoDB
-	        table.put_item(
-	          Item={
-	          'timestamp': dateTime,
-	          'name': payload['name'],
-	          'email': payload['email'],
-	          'message': payload['msg']
-	          }
-	        )
-	        
-	        # Return success
-	        return {
-	            'statusCode': 200,
-	            'body': json.dumps('Successfully saved contact info!'),
-	            'headers': {
-	                "Access-Control-Allow-Origin": "*",
-	                "Access-Control-Allow-Credentials": True,
-	            }
-	        }
-	        
-	    except:
-	        # Return error
-	        return {
-	                'statusCode': 400,
-	                'body': json.dumps('Error saving contact info'),
-	                'headers': {
-	                    "Access-Control-Allow-Origin": "*",
-	                    "Access-Control-Allow-Credentials": True,
-	                }
-	        }
+		```python
+		import json                     # used for converting json strings to Python objects
+		import boto3                    # handles AWS
+		from datetime import datetime   # used for creating the timestamp
+		
+		def lambda_handler(event, context):
+			# Connect to the DynamoDB table
+			db = boto3.resource('dynamodb')
+			table = db.Table('Contacts')
+		
+			# Create the time stamp
+			dateTime = (datetime.now()).strftime("%Y-%m-%d %H:%M:%S")
+			
+			try:
+				# Get the contact info from the request
+				payload = json.loads(event['body'])
+			
+				# Add a row with contact info to DynamoDB
+				table.put_item(
+				Item={
+				'timestamp': dateTime,
+				'name': payload['name'],
+				'email': payload['email'],
+				'message': payload['msg']
+				}
+				)
+				
+				# Return success
+				return {
+					'statusCode': 200,
+					'body': json.dumps('Successfully saved contact info!'),
+					'headers': {
+						"Access-Control-Allow-Origin": "*",
+						"Access-Control-Allow-Credentials": True,
+					}
+				}
+				
+			except:
+				# Return error
+				return {
+						'statusCode': 400,
+						'body': json.dumps('Error saving contact info'),
+						'headers': {
+							"Access-Control-Allow-Origin": "*",
+							"Access-Control-Allow-Credentials": True,
+						}
+				}
 
-    ```
+		```
 
+     - Press **Deploy**
+ 
 3. **Verify**
     - Use the "Test" feature in the Lambda console to ensure it returns the correct response.
         - Press "Test"
@@ -143,12 +145,13 @@ We will need two lambda functions. One that writes the contact information to th
             - Event name: `AddContactInfoToDynamoDB`
             - Event JSON
             
-              ```json
+				```json
 				{
-				  "httpMethod": "POST",
-				  "body": "{\"name\": \"Darth\", \"email\": \"darth.vader@email.com\", \"msg\": \"I am your ...\"}"
+					"httpMethod": "POST",
+					"body": "{\"name\": \"Darth\", \"email\": \"darth.vader@email.com\", \"msg\": \"I am your ...\"}"
 				}
-             ```
+				```
+
             - Press "Save"
            
         - Press "Test" (again)
@@ -180,13 +183,17 @@ We will need two lambda functions. One that writes the contact information to th
 
         
 5. **Verify**
-    2. Navigate to the API Gateway service and select the newly created API
+    - Navigate to the API Gateway service and select the newly created API
         - Go to the Test tab
             - Method type: POST
             - Request body:
             
             	```json
-            	TODO
+            	{
+					"name": "Yoda",
+					"email": "yoda@email.com",
+					"msg": "The greatest teacher, failure is."
+				}
             	```
 
 6. **Create an IAM role that grants the lambda function access to SES**
@@ -196,8 +203,9 @@ We will need two lambda functions. One that writes the contact information to th
     - Select _AWS service_
     - Service or use case: **Lambda**
     - Press **Next**
-    - Check: AWSLambdaBasicExecutionRole
-    - Check: AmazonSESFullAccess
+		- Check: **AWSLambdaBasicExecutionRole**
+		- Check: **AmazonSESFullAccess**
+		- Check: **AmazonDynamoDBFullAccess**
     - Press **Next**
     - Role name: LambdaRoleToAccessSES
     - Press **Create role**
@@ -214,67 +222,64 @@ We will need two lambda functions. One that writes the contact information to th
         
     - Change the Python code for your Lambda function to this:
 
-    > `lambda_function.py`
+		> `lambda_function.py`
 
-    ```python
-	import json
-	import boto3
-	
-	# Initialize the DynamoDB client
-	dynamodb = boto3.resource('dynamodb')
-	table = dynamodb.Table('ContactDemo')  # Replace with your DynamoDB table name
-	
-	def lambda_handler(event, context):
-	    # Scan the DynamoDB table
-	    result = table.scan()
-	    items = result['Items']
-	    
-	    ses = boto3.client('ses')
-	
-	    body = f"""
-			Contact Information:
-			{items}
-			"""
-	
-	    ses.send_email(
-		    Source = '<FROM_EMAIL>',
-		    Destination = {
-			    'ToAddresses': [
-				    '<TO_EMAIL>'
-			    ]
-		    },
-		    Message = {
-			    'Subject': {
-				    'Data': 'Contact Info Notification',
-				    'Charset': 'UTF-8'
-			    },
-			    'Body': {
-				    'Text':{
-					    'Data': body,
-					    'Charset': 'UTF-8'
-				    }
-			    }
-		    }
-	    )
-	    
-	    return {
-	        'statusCode': 200,
-	        'body': json.dumps('Successfully sent email from Lambda using Amazon SES')
-	    }
+		```python
+		import json
+		import boto3
+		
+		# Initialize the DynamoDB client
+		dynamodb = boto3.resource('dynamodb')
+		table = dynamodb.Table('ContactDemo')  # Replace with your DynamoDB table name
+		
+		def lambda_handler(event, context):
+			# Scan the DynamoDB table
+			result = table.scan()
+			items = result['Items']
+			
+			ses = boto3.client('ses')
+		
+			body = f"""
+				Contact Information:
+				{items}
+				"""
+		
+			ses.send_email(
+				Source = '<FROM_EMAIL>',
+				Destination = {
+					'ToAddresses': [
+						'<TO_EMAIL>'
+					]
+				},
+				Message = {
+					'Subject': {
+						'Data': 'Contact Info Notification',
+						'Charset': 'UTF-8'
+					},
+					'Body': {
+						'Text':{
+							'Data': body,
+							'Charset': 'UTF-8'
+						}
+					}
+				}
+			)
+			
+			return {
+				'statusCode': 200,
+				'body': json.dumps('Successfully sent email from Lambda using Amazon SES')
+			}
 
-    ```
+		```
+
+     - Press **Deploy**
 
 8. **Verify**
     - Use the "Test" feature in the Lambda console to ensure it returns the correct response.
         - Press "Test"
             - Test event action: Create new event
-            - Event name: `SendContactInfoEmailViaSES`
-            - Event JSON
-            
-              ```json
-				{
-				  "body": "{\"name\": \"John Doe\", \"email\": \"john.doe@example.com\", \"msg\": \"This is a test message.\"}"
-				}             ```
+            - Event name: `SendContactInfoEmail`
+            - Event JSON: **Empty**
             - Press "Save"
            
         - Press "Test" (again)
@@ -290,14 +295,16 @@ We will need two lambda functions. One that writes the contact information to th
             - Check your inbox (also check the spam directory)
 
 9. **Add DynamoDB as trigger for the SendContactInfoEmail lambda funtion**
+    - Press "+ Add trigger" in the Function Overview Diagram
+    - Choose the DynamoDB service.
+		- DynamoDB table: **Contacts**
+        - Press **Add**
            
 10. **Verify**
 	- Navigate to the AddContactInfo lambda function
    	- Use the "Test" feature in the Lambda console to ensure it returns the correct response.
    		- Press "Test"
    	- Check the entry in the DynamoDB table and that you also receive an email.
-
-
 
 ## Step 4: Develop a Web Page with a Contact Form
 
@@ -381,7 +388,9 @@ We will need two lambda functions. One that writes the contact information to th
 
 2.  **Verify**
 
-    Use your web browser and go to `file://<path>/index.html`
+    - Use your web browser and go to `file://<path>/index.html`
+	- Check the record in DynamoDB
+	- Check that you received an email
 
 
 ## Step 5: Set Up S3 for Static Website Hosting
@@ -389,7 +398,7 @@ We will need two lambda functions. One that writes the contact information to th
 1. **Create an S3 Bucket**
     - Navigate to the S3 service in the AWS Management Console.
     - Click "Create bucket"
-        - Bucket name: `greetings<date><time>` (The bucket name must be unique)
+        - Bucket name: `contacts<date><time>` (The bucket name must be unique)
         - Click "Create bucket"
 
 2. **Upload the Web Page**
@@ -427,31 +436,48 @@ We will need two lambda functions. One that writes the contact information to th
 
 3. **Verify**
     - Access the bucket URL (provided in the static website hosting settings) to ensure your web page loads.
+	- Fill in the contact form and verify that the information is stored in DynamoDB and that you receive a notification email.
 
+## Step 6: Set Up a CodePipeline
 
-## Step 6: Upload the index.html to S3
+1. **Create a CodeCommit git repository**
+	- Name: `ContactForm`
+	- Commit the index.html file to the repo
 
-1. **Upload the finished Web Page**
-    - Upload the `index.html` file to your S3 bucket.
+2. **Create CodePipeline**
+	- Navigate to CodePipeline
+		- Pipeline name: `ContactPipeline`
+		- Next
+	- Source
+		- Source provider: AWS CodeCommit
+		- Repository name: ContactPipeline
+		- Branch name: main
+		- Next
+	- Build
+		- Press **Skip build stage**
+	- Deploy
+		- Deploy provider: Amazon S3
+		- Bucket: contactform...
+		- Check _Extract file before deploy_ (important!)
+		- Next
+	- Press **Create pipeline**
 
-2. **Verify**
-    - Access the web page hosted on S3 and verify it displays the correct greeting.
 
 
 ## Final Thoughts
 
 This tutorial demonstrates a step-by-step approach to creating a serverless web application using AWS services. By following these steps, you should have a functional web app with a contact form that saves the contact info in a DynamoDB and sends a notification email.
 
-As a next step you could setup a CodePipeline in order to have the code in a git repository like CodeCommit.
-
 ## Cleanup
 
 Remove resources you no longer need to avoid unnecessary costs.
 
 - S3
-- Lambda
+- Lambda functions
 - API Gateway
 - DynamoDB
-- IAM Role
+- IAM Roles
+- CodeCommit
+- CodePipeline
 
 # Happy Serverless Developing on AWS! 🚀
