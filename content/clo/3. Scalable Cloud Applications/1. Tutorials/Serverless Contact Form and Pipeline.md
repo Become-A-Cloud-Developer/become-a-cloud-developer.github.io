@@ -440,6 +440,8 @@ We will need two lambda functions. One that writes the contact information to th
 
 ## Step 6: Set Up a CodePipeline
 
+Reference: https://docs.aws.amazon.com/codepipeline/latest/userguide/tutorials-s3deploy.html
+
 1. **Create a CodeCommit git repository**
 	- Name: `ContactForm`
 	- Commit the index.html file to the repo
