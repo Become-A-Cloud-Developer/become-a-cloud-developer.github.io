@@ -230,7 +230,7 @@ We will need two lambda functions. One that writes the contact information to th
 		
 		# Initialize the DynamoDB client
 		dynamodb = boto3.resource('dynamodb')
-		table = dynamodb.Table('ContactDemo')  # Replace with your DynamoDB table name
+		table = dynamodb.Table('Contacts')  # Replace with your DynamoDB table name
 		
 		def lambda_handler(event, context):
 			# Scan the DynamoDB table
