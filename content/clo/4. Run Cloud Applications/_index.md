@@ -1,6 +1,6 @@
 +++
 archetype = "chapter"
-title = "4. Run Cloud Applications"
+title = "Run Cloud Applications"
 weight = 4
 collapsibleMenu = true
 alwaysopen = false
