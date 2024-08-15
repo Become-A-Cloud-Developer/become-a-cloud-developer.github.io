@@ -5,6 +5,12 @@ date = 2024-08-15
 draft = false
 +++
 
+> ### Clone this repo to get started
+
+```bash
+git clone https://github.com/CLO-AttDriftaMolnapplikationer/DemoCleanSolution.git
+```
+
 ## The Dependency Graph
 
 This is the dependency graph between the projects in the solution
