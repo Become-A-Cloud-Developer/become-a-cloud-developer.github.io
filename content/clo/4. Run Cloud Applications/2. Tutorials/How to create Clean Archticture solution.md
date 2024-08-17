@@ -38,6 +38,10 @@ graph LR
 
 ```
 
+### Example: User
+
+![Architecture](/CleanArchDDD.png)
+
 ## Bash Script
 
 
