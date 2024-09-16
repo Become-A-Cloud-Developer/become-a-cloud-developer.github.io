@@ -49,6 +49,12 @@ Run the application and verify that it works.
 dotnet run
 ```
 
+> If you get errors when running you might need to run the following command:
+
+```bash
+dotnet nuget add source https://api.nuget.org/v3/index.json -n nuget.org
+```
+
 ## Step 1: Setup a MongoDB as a Docker container
 
 MongoDB has its own official Docker image at Docker Hub called `mongo`. This container will act as the database for our ASP.NET application. In order to make it available locally for the application we run it like this:
