@@ -1,5 +1,5 @@
 +++
-title = 'Kubernetes MongoDB'
+title = 'MongoDB'
 weight = 2
 date = 2024-10-02
 draft = false
