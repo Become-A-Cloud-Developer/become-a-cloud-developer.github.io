@@ -9,6 +9,11 @@ draft = false
 
 ### Install `gcloud` CLI
 
+<details>
+<summary> test</summary>
+random test text
+</details>
+
 Before deploying to GKE, you need to set up `gcloud` (the Google Cloud SDK command-line tool)
 
 1. Install python 3
