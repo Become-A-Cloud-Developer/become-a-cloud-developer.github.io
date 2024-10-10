@@ -7,6 +7,7 @@ draft = false
 
 # Demo - Kubernetes ArgoCD
 
+
 ### Install ArgoCD
 
 1. Install Argo CD in the Kubernetes cluster
