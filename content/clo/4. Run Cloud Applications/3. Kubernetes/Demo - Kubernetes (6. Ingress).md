@@ -1,7 +1,7 @@
 +++
 title = 'Ingress'
-weight = 6
-date = 2024-10-15
+weight = 5
+date = 2024-10-10
 draft = false
 +++
 
