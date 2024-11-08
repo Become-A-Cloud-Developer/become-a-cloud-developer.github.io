@@ -1,6 +1,6 @@
 +++
 title = "Serverless: Webapp with Contact Form and Code Pipeline"
-weight = 7
+weight = 8
 date = 2024-05-29
 draft = false
 +++

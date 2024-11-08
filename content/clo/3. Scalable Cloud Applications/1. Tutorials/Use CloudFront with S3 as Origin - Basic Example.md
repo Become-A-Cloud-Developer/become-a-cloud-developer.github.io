@@ -1,0 +1,89 @@
++++
+title = "Use CloudFront with S3 as Origin - Basic Example"
+weight = 7
+date = 2025-11-08
+draft = false
++++
+
+# Use CloudFront with S3 as Origin - Basic Example
+
+## Introduction
+
+This tutorial will walk you through setting up a new S3 bucket hosting a simple `index.html` page and integrating it with Amazon CloudFront for secure and optimized content delivery. By the end of this guide, you’ll have a CloudFront distribution configured with an S3 origin and secured with HTTPS.
+
+## Prerequisites
+
+- An active AWS account
+
+## Step 1: Develop a Simple Web Page
+
+1. **Create an `index.html` file with the following content:**
+
+    > `index.html`
+
+   ```html
+   <!DOCTYPE html>
+   <html lang="en">
+   <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>My CloudFront Example</title>
+   </head>
+   <body>
+       <h1>Welcome to my CloudFront-secured website!</h1>
+   </body>
+   </html>
+
+2.  **Verify**
+
+    Use your web browser and go to `file://<path>/index.html`
+
+
+## Step 2: Set Up S3 for Static Website Hosting
+
+1. **Create an S3 Bucket**
+    - Navigate to the S3 service in the AWS Management Console.
+    - Click "Create bucket"
+        - Bucket name: `cloudfrontdemo<date><time>` (The bucket name must be unique)
+        - Click "Create bucket"
+
+2. **Upload the Web Page**
+    - Upload the `index.html` file to your S3 bucket.
+
+## Step 3: Create a CloudFront Distribution
+
+1. **Set Up CloudFront**
+
+    - Navigate to the **CloudFront** service in the AWS Management Console.
+    - Click **Create Distribution**
+        - **Origin Domain**: Select your S3 bucket from the dropdown.
+        - **Origin access**: Select _Origin access control settings_
+        - Press the button **Create new OAC**
+        - In the popup keep default values and press **Create**
+        - **Viewer protocol policy**: Select _Redirect HTTP to HTTPS_
+        - **WAF**: Select _Do not enable security protections_
+        - **Default root object**: Enter _index.html_
+        - Click **Create Distribution** 
+        
+    Wait for the status to change from **Deploying** to **Date**. This may take a few minutes.
+
+2. **Adjust the policy of the S3 bucket to allow ClodFront access**
+
+    - In the yellow banner click **Copy Policy**
+    - Follow the link in the banner to get to your S3 Bucket
+    - Navigate to the **Permissions** tab
+        - Edit the **Bucket Policy**
+        - Paste in the policy
+        - **Save Changes**
+    
+## Step 4: Verify Your CloudFront Distribution
+
+1. Once deployed, copy the **Domain Name** of your CloudFront distribution (e.g., `d123abc456.cloudfront.net`).
+2. Open this domain in your web browser. You should see your `index.html` page served securely via CloudFront.
+3. Try to use http as well. What happens?
+
+## Conclusion
+
+Congratulations! You’ve successfully set up an S3 bucket with `index.html` as the origin for CloudFront. Your content is now served with lower latency, secure HTTPS, and scalability benefits provided by CloudFront.
+
+# Happy Secure Surfing on AWS! 🚀
