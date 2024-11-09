@@ -1,7 +1,7 @@
 +++
 archetype = "chapter"
 title = "Demos"
-weight = 31
+weight = 32
 collapsibleMenu = true
 alwaysopen = false
 +++

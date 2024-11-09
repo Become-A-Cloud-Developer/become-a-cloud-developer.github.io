@@ -1,6 +1,6 @@
 +++
 title = "Setup An AWS CodeCommit Git Repo"
-weight = 5
+weight = 7
 date = 2024-05-20
 draft = false
 +++

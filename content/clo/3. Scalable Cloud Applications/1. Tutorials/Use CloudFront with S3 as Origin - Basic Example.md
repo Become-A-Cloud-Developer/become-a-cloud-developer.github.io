@@ -1,6 +1,6 @@
 +++
 title = "Use CloudFront with S3 as Origin - Basic Example"
-weight = 7
+weight = 5
 date = 2025-11-08
 draft = false
 +++

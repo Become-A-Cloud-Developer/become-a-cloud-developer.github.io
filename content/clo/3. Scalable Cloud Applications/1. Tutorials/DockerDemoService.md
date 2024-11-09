@@ -1,6 +1,6 @@
 +++
 title = "Provision Docker Swarm for ToDo App"
-weight = 4
+weight = 2
 date = 2024-05-16
 draft = true
 +++

@@ -1,6 +1,6 @@
 +++
 title = "Provision a Virtual Machine on AWS using Cloudformation"
-weight = 3
+weight = 1
 date = 2024-04-29
 draft = false
 +++

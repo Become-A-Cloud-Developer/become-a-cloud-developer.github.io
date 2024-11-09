@@ -1,6 +1,6 @@
 +++
 title = "Serverless: Use CloudFront to Secure Your Serverless App"
-weight = 9
+weight = 6
 date = 2025-11-08
 draft = true
 +++
