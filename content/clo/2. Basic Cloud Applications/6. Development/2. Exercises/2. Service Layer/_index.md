@@ -1,7 +1,7 @@
 +++
 archetype = "chapter"
-title = "Tutorials"
-weight = 21
+title = "2. Service Layer"
+weight = 1
 collapsibleMenu = true
 alwaysopen = false
 +++
